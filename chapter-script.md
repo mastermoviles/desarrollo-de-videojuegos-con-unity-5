@@ -44,8 +44,6 @@ El elemento principal del motor de un videojuego es el ciclo del juego. Se trata
 * Actualizar los elementos de la escena \(_Game Objects_\).
 * Dibujar los gráficos de la escena actual.
 
-
-
 ### Acceso a los componentes y polimorfismo
 
 ### Interfaz pública del script
