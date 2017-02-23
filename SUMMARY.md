@@ -7,6 +7,7 @@
 * [Scripting con Unity](/chapter-script.md)
 * [Patrones de diseño](/chapter-patrones.md)
 * [Controles del videojuego](/chapter-control.md)
+* Soporte multiplataforma
 * Logros y marcadores
 
 
