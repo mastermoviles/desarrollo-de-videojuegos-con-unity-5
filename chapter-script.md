@@ -6,9 +6,9 @@ Para la edición de estos _scripts_ contamos con la herramienta MonoDevelop, aun
 
 ### Creación de scripts
 
-Crearemos un _script_ como cualquier otro _asset_, con la opción del menú _Assets &gt; Create &gt; C\# Script_. Una vez creado, podremos añadirlo como componente a cualquier _Game Object_, pudiendo de esta forma personalizar su comportamiento. Los _scripts _se comportarán como un tipo de componente más.
+Crearemos un _script_ como cualquier otro _asset_, con la opción del menú _Assets &gt; Create &gt; C\# Script_. Una vez creado, podremos añadirlo como componente a cualquier _Game Object_, pudiendo de esta forma personalizar su comportamiento. Los \_scripts \_se comportarán como un tipo de componente más.
 
-Veremos el _script_ creado entre los _assets_ del proyecto. Haciendo doble _click_ sobre él se abrirá en el editor de código que tengamos configurado, pudiendo así editarlo. 
+Veremos el _script_ creado entre los _assets_ del proyecto. Haciendo doble _click_ sobre él se abrirá en el editor de código que tengamos configurado, pudiendo así editarlo.
 
 ### Estructura de un script
 
@@ -37,6 +37,12 @@ Estos son los métodos principales que encontraremos en la plantilla, aunque tam
 * `LateUpdate`: Se ejecuta después de haber ejecutado los `Update` de todos los objetos. Al igual que el caso anterior, también será útil para el caso de tener dependencias. Podemos dejar para `LateUpdate` todas las actualizaciones que dependan de haber actualizado todo lo que realiza `Update`.
 
 ### Ciclo del juego
+
+El elemento principal del motor de un videojuego es el ciclo del juego. Se trata de un bucle infinito que se ejecuta a una determinada frecuencia \(es habitual que se ejecute a 60 FPS, 60 veces por segundo\), y en cada iteración lo que hace es:
+
+* Leer la entrada del usuario \(mandos, teclado, ratón, pantalla táctil, etc\).
+* Actualizar los elementos de la escena \(_Game Objects_\).
+* Dibujar los gráficos de la escena actual.
 
 
 
