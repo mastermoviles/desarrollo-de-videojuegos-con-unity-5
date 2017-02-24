@@ -44,7 +44,53 @@ El elemento principal del motor de un videojuego es el ciclo del juego. Se trata
 * Actualizar los elementos de la escena \(_Game Objects_\).
 * Dibujar los gráficos de la escena actual.
 
+Hay que remarcar que sólo se actualizará y se dibujará la escena actualmente activa. Es decir, funciona como una máquina de estados, en la que cada escena representa un estado. Por ejemplo, podemos tener una escena con nuestra pantalla de título, otra con el menú de selección de nivel y otra para cada nivel del juego. Para pasar de una pantalla a otra podremos cambiar de escena, y en ese momento Unity cargará todos sus _Game Objects_, llamará a sus métodos `Awake` y `Start` para inicializarlos, y tras esto los actualizará en cada iteración del juego llamando a sus métodos `Update` y `LateUpdate` mientras la escena siga activa. 
+
+Podemos cambiar a otra escena usando el método `SceneManager.LoadScene`, proporcionando el nombre de la escena a la que queremos cambiar:
+
+```
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class JugadorScript : MonoBehaviour {
+    void Update () {
+        ...
+        if(muerto) {
+            SceneManager.LoadScene ("GameOver");        
+        }
+    }
+}
+```
+
+En este caso, por defecto se destruirán todos los objetos de la escena actual y se cargarán los de la nueva que se inicializarán y empezarán a actualizarse. También existe la opción de cargar una escena de forma aditiva, que nos permitirá cargar los objetos de la nueva escena sin destruir los actuales:
+
+```
+SceneManager.LoadScene ("Laboratorio", LoadSceneMode.Additive);
+```
+
+En cualquiera de los casos anteriores, los objetos que se carguen serán inicializados y comenzarán a actualizarse hasta que se destruyan. Aunque en muchos videojuegos la frecuencia de actualización del ciclo del juego habitualmente es de 60 FPS, en Unity puede variar según la plataforma. En plataformas de sobremesa suele intentar alcanzar los máximos FPS posibles, mientras que en móviles suele limitar a 30 FPS para ahorrar batería. Si no queremos este comportamiento por defecto, podemos especificar los FPS que queremos intentar conseguir con:
+
+```
+Application.targetFrameRate = 60;
+```
+
+Esto no nos garantiza que podamos conseguir una frecuencia de 60 FPS, ya que según la capacidad de la máquina podría no llegar a conseguir esta frecuencia, pero intentará llegar a ella. Además, tampoco podemos confiar en que la frecuencia se mantenga constante, dependiendo de la carga gráfica y de procesamiento del videojuego, en determinados momentos podría bajar. Por este motivo es importante poder conocer en todo momento cuánto tiempo ha transcurrido desde la anterior actualización hasta la actual. Esto es lo que se conoce como _delta time_, y el motor Unity nos lo proporciona en segundos en la propiedad `Time.deltaTime`:. Un uso habitual de esta propiedad es la actualización de la posición de los objetos en la escena. Si sabemos la velocidad de un objeto, la posición que ocupaba en el fotograma anterior, y tenemos el tiempo transcurrido desde dicho fotograma, podemos calcular la nueva posición con:
+
+```
+posicion = posicion + velocidad * Time.deltaTime;
+```
+
+
+
 ### Acceso a los componentes y polimorfismo
+
+Como hemos comentado anteriormente, Unity sigue una arquitectura orientada a componentes. El comportamiento de los objetos lo definen los componentes que incorporan, y hemos visto que los _scripts_ son un tipo de componente más. Por lo tanto, para poder modificar las propiedades de los objetos desde el código de los _scripts_ deberemos ser capaces de acceder a los diferentes componentes que incorpora el objeto. Algunos de los componentes a los que nos puede interesar acceder son:
+
+
+
+
+
+
 
 ### Interfaz pública del script
 
