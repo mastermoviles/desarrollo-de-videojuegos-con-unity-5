@@ -44,7 +44,7 @@ El elemento principal del motor de un videojuego es el ciclo del juego. Se trata
 * Actualizar los elementos de la escena \(_Game Objects_\).
 * Dibujar los gráficos de la escena actual.
 
-Hay que remarcar que sólo se actualizará y se dibujará la escena actualmente activa. Es decir, funciona como una máquina de estados, en la que cada escena representa un estado. Por ejemplo, podemos tener una escena con nuestra pantalla de título, otra con el menú de selección de nivel y otra para cada nivel del juego. Para pasar de una pantalla a otra podremos cambiar de escena, y en ese momento Unity cargará todos sus _Game Objects_, llamará a sus métodos `Awake` y `Start` para inicializarlos, y tras esto los actualizará en cada iteración del juego llamando a sus métodos `Update` y `LateUpdate` mientras la escena siga activa. 
+Hay que remarcar que sólo se actualizará y se dibujará la escena actualmente activa. Es decir, funciona como una máquina de estados, en la que cada escena representa un estado. Por ejemplo, podemos tener una escena con nuestra pantalla de título, otra con el menú de selección de nivel y otra para cada nivel del juego. Para pasar de una pantalla a otra podremos cambiar de escena, y en ese momento Unity cargará todos sus _Game Objects_, llamará a sus métodos `Awake` y `Start` para inicializarlos, y tras esto los actualizará en cada iteración del juego llamando a sus métodos `Update` y `LateUpdate` mientras la escena siga activa.
 
 Podemos cambiar a otra escena usando el método `SceneManager.LoadScene`, proporcionando el nombre de la escena a la que queremos cambiar:
 
@@ -80,17 +80,19 @@ Esto no nos garantiza que podamos conseguir una frecuencia de 60 FPS, ya que seg
 posicion = posicion + velocidad * Time.deltaTime;
 ```
 
-
-
 ### Acceso a los componentes y polimorfismo
 
 Como hemos comentado anteriormente, Unity sigue una arquitectura orientada a componentes. El comportamiento de los objetos lo definen los componentes que incorporan, y hemos visto que los _scripts_ son un tipo de componente más. Por lo tanto, para poder modificar las propiedades de los objetos desde el código de los _scripts_ deberemos ser capaces de acceder a los diferentes componentes que incorpora el objeto. Algunos de los componentes a los que nos puede interesar acceder son:
 
+| Componente | Descripción |
+| :--- | :--- |
+| Transform | Nos permitirá cambiar la posición, orientación y escala de un objeto. Es un componente básico para mover los objetos en la escena. |
+| Renderer | Nos permite cambiar el material y la apariencia de un objeto. |
+| AudioSource | Nos permite reproducir clips de audio desde un determinado lugar de la escena. |
+| Camera | Nos permite configurar la cámara, como por ejemplo el campo visual de la misma. |
+| Light | Nos permite cambiar las propiedades de las luces, como por ejemplo cambiar la intensidad o color de las mismas. |
 
-
-
-
-
+### 
 
 ### Interfaz pública del script
 
