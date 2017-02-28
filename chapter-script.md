@@ -88,19 +88,19 @@ Como hemos comentado anteriormente, Unity sigue una arquitectura orientada a com
 | :--- | :--- |
 | Transform | Nos permitirá cambiar la posición, orientación y escala de un objeto. Es un componente básico para mover los objetos en la escena. |
 | Renderer | Nos permite cambiar el material y la apariencia de un objeto. |
-| AudioSource | Nos permite reproducir clips de audio desde un determinado lugar de la escena. |
+| AudioSource | Nos permite reproducir _clips_ de audio desde un determinado lugar de la escena. |
 | Camera | Nos permite configurar la cámara, como por ejemplo el campo visual de la misma. |
 | Light | Nos permite cambiar las propiedades de las luces, como por ejemplo cambiar la intensidad o color de las mismas. |
 
-Uno de los componentes que más utilizaremos será Transform, que será el que nos permita cambiar la posición de los objetos en la escena. Podemos obtener el componente de la siguiente forma:
+Uno de los componentes que más utilizaremos será `Transform`, que será el que nos permita cambiar la posición de los objetos en la escena. Podemos obtener el componente de la siguiente forma:
 
 `Transform transform = GetComponent<Transform>();`
 
-El método GetComponent nos devolverá el componente que indiquemos del Game Object sobre el que estemos, o null si este Game Objectc no tuviese ningún componente de este tipo. De esta forma podremos comprobar si nuestro objeto \(el objeto sobre el que apliquemos nuestro script\) tiene o no un determinado componente. Una vez obtenido el componente, podremos acceder y modificar sus propiedades. Por ejemplo, en el caso del componente Transform podríamos modificar su posición, para así mover el objeto:
+El método `GetComponent` nos devolverá el componente que indiquemos del _Game Object_ sobre el que estemos, o `null` si este _Game Object_ no tuviese ningún componente de este tipo. De esta forma podremos comprobar si nuestro objeto \(el objeto sobre el que apliquemos nuestro _script_\) tiene o no un determinado componente. Una vez obtenido el componente, podremos acceder y modificar sus propiedades. Por ejemplo, en el caso del componente `Transform` podríamos modificar su posición, para así mover el objeto:
 
 `transform.position = new Vector3(0,0,5);`
 
-Cuando vayamos a utilizar en repetidas ocasiones un determinado componente, es conveniente que lo guardemos en uno de los campos de nuestra clase, para de esta forma no tener que volver a obtenerlo cada vez. Este es habitualmente el caso de Transform, que podríamos guardarlo al inicializar nuestro objeto de la siguiente forma:
+Cuando vayamos a utilizar en repetidas ocasiones un determinado componente, es conveniente que lo guardemos en uno de los campos de nuestra clase, para de esta forma no tener que volver a obtenerlo cada vez. Este es habitualmente el caso de `Transform`, que podríamos guardarlo al inicializar nuestro objeto de la siguiente forma:
 
 ```
 private Transform m_transform;
@@ -112,7 +112,7 @@ void Start () {
 
 Será recomendable hacer esto para cualquier componente que vayamos a utilizar en repetidas ocasiones.
 
-Si nuestro _script_ requiere que el Game Object sobre el que se aplica tenga un determinado componente para poder funcionar correctamente, podemos añadir la siguiente directiva en la clase del script:
+Si nuestro _script_ requiere que el Game Object sobre el que se aplica tenga un determinado componente para poder funcionar correctamente, podemos añadir la siguiente directiva en la clase del _script_:
 
 ```
 [RequireComponent(typeof(Renderer))]
@@ -121,37 +121,23 @@ public class JugadorScript : MonoBehaviour {
 }
 ```
 
+En el ejemplo anterior sólo podremos añadir nuestro script `JugadorScript` a _Game Objects_ que tengan un componente `Renderer`. En caso de no tenerlo, el entorno no nos permitirá añadir nuestro _script_ como componente. De esta forma estaremos garantizando que cuando solicitemos dicho componente mediante `GetComponent<Transform>()`, éste existirá, y no nos devolverá `null`.
 
+### Parametrización del script
 
-En el ejemplo anterior sólo podremos añadir nuestro script JugadorScript a Game Objects que tengan un componente Renderer. En caso de no tenerlo, el entorno no nos permitirá añadir nuestro script como componente. De esta forma estaremos garantizando que cuando solicitemos dicho componente mediante GetComponent&lt;Transform&gt;\(\), éste existirá, y no nos devolverá null.
+Para hacer nuestro _script_ reutilizable en diferentes contextos, podemos parametrizarlo de forma que desde el propio entorno de Unity al añadirlo a un objeto podamos modificar desde el inspector las diferentes propiedades que hayamos definido.
 
+Para parametrizar un _script_ simplemente deberemos añadir una propiedad pública a la clase del _script_, como por ejemplo:
 
+```
+public Vector3 posicionInicial;
 
-Parametrización del script
-
-Para hacer nuestro script reutilizable en diferentes contextos, podemos parametrizarlo de forma que desde el propio entorno de Unity al añadirlo a un objeto podamos modificar desde el inspector las diferentes propiedades que hayamos definido.
-
-
-
-Para parametrizar un script simplemente deberemos añadir una propiedad pública a la clase del script, como por ejemplo:
-
-
-
-public Vector3 posicionInicial;
-
-
-
-void Start \(\) {
-
-    GetComponent&lt;Transform&gt;\(\).position = posicionInicial;
-
+void Start () {
+    GetComponent<Transform>().position = posicionInicial;
 }
+```
 
-
-
-
-
-Al añadir dicha propiedad posicionInicial y grabar el script, cuando pasemos al entorno de Unity veremos que en el bloque destinado al componente de dicho script en el Inspector habrá aparecido un campo para editar el valor de la propiedad.
+Al añadir dicha propiedad posicionInicial y grabar el _script_, cuando pasemos al entorno de Unity veremos que en el bloque destinado al componente de dicho _script_ en el Inspector habrá aparecido un campo para editar el valor de la propiedad.
 
 ### 
 
