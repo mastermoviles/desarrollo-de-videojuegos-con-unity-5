@@ -139,7 +139,35 @@ void Start () {
 
 Al añadir dicha propiedad posicionInicial y grabar el _script_, cuando pasemos al entorno de Unity veremos que en el bloque destinado al componente de dicho _script_ en el Inspector habrá aparecido un campo para editar el valor de la propiedad.
 
-### 
+![](imagenes/scripts/script_param.png)
+
+De esta forma podremos modificar de forma sencilla desde el entorno la posición inicial en la que se creará nuestro objeto, sin tener que entrar a editar el código, y si el _script_ se introduce en diferentes objetos, cada uno de ellos podrá inicializarse en una posición distinta, configurando este parámetro para cada uno de ellos. De esta forma mejoramos la reusabilidad de nuestro _script_.
+
+Podremos crear parámetros de diferentes tipos. En el ejemplo anterior hemos utilizado el tipo `Vector3`, que es el tipo utilizado en Unity para establecer coordenadas _(x,y,z)_ en el espacio tridimensional, pero podríamos utilizar cualquier otro tipo de datos, como por ejemplo los diferentes tipos básicos de datos (`bool`, `int`, `float`, `String`, etc) o colecciones de elementos (`List`).
+
+### Componentes y polimorfirmo
+
+Un tipo de parámetro que merece atención especial es aquel que toma como tipo el tipo de algún componente. Por ejemplo, podríamos incorporar un parámetro de tipo `Transform`:
+
+```
+public Transform target;
+```
+
+En este caso, veremos el parámetro de la siguiente forma en el entorno:
+
+![](imagenes/scripts/script_param_object.png)
+
+A este parámetro le podremos asignar cualquier _Game Object_ de la escena o _prefab_ que incorpore un componente de tipo `Transform`. Es decir, los _Game Objects_ se comportan de forma polimórfica respecto a sus componentes. Esto significa que podrán tomar la forma de cualquiera de los componentes que incorporen a la hora de asignarlos a parámetros
+
+Esto nos da una gran versatilidad. Con un parámetro de tipo `Transform` estamos pidiendo que nos asignen cualquier objeto que incorpore este componente, sin importarnos el tipo de objeto concreto del que se trate. De esta forma reducimos el acoplamiento del código, haciéndolo más modular y favoreciendo la reutilización de los componentes.
+
+Además, debemos recalcar que nuestro _scripts_ se comportan también como componentes. Por lo tanto, podríamos poner un parámetro cuyo tipo sea el de uno de nuestros _scripts_:
+
+```
+public JugadorScript jugador;
+```
+
+En este caso podremos asignar a dicho parámetro cualquier _Game Object_ que incorpore como componentes nuestro _script_ `JugadorScript`. Tendremos además acceso a las propiedades y métodos públicos del _script_.
 
 ### Interfaz pública del script
 
@@ -148,6 +176,3 @@ Al añadir dicha propiedad posicionInicial y grabar el _script_, cuando pasemos 
 ### Creación y destrucción de objetos
 
 ### Corrutinas
-
-
-
